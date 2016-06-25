@@ -25,11 +25,6 @@ module.exports = function(app){
             if (err) throw err;
             companies.forEach(function(c){
                 
-                // // calculuate the mean hotness for each company
-                // if (c.events.length !== 0){
-                //     c.hotness = (c.hotness)/(c.events.length);
-                // }
-                
                 // randomly put stuff in "company" array
                 if (Math.random() >= 0.3) {
                     resp.data.company.push(c);    
