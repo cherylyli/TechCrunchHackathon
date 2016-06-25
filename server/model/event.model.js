@@ -10,7 +10,7 @@ var eventSchema = new Schema({
     subsidiary  : [String],
     address     : String,
     registerer  : [Number],  // array of user ids
-    startDate   : Date,        //weird time stuff
+    startDate   : Date,
     endDate     : Date,
     expired     : Boolean,
     views       : Number,

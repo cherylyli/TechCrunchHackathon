@@ -11,7 +11,7 @@ var userSchema = new Schema({
         school: String,
         major : String
     },
-    companiesOfInterest: [String],    //list of companies that the user is interested in
+    companiesOfInterest: [String], //list of companies that the user is interested in
     events: [String],
     following: [String]
 });
