@@ -29,7 +29,7 @@ var API = {
 
     EVENTINFO: API_HOST + '/eventinfo',
 
-    COMPANY: API_HOST + '/company',
+    COMPANY: API_HOST + '/user/following',
     
     EVENT: API_HOST + '/user/myevents',
     

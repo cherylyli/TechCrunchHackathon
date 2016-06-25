@@ -300,7 +300,7 @@ angular.module('starter.controllers', [])
             success: function (result) {
                 if (result.statusCode == 200) {
                     console.log(result.data);
-                    $scope.company = result.data.company;
+                    $scope.company = result.data;
 
                 }
                 $ionicLoading.hide();
