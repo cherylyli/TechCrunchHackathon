@@ -1,5 +1,6 @@
-var User = require('../model/user.model');
+var User    = require('../model/user.model');
 var Company = require('../model/company.model');
+var Event   = require('../model/event.model');
 var bodyParser = require('body-parser');
 
 
@@ -75,4 +76,60 @@ module.exports = function(app){
             } //end IFELSE block
         });
     }); //end POST('/api/companyinfo')
+    
+    app.post('/api/addevent', function(req, res) {
+        Company.findOne({name: req.body.company}, function(err, company){
+            if (err) throw err;
+            if (!company){
+                res.end({
+                    errorType: "company",
+                    errorMessage: "company name not found in database"
+                });
+            } else {
+                console.log("Adding an event to " + req.body.company);
+                var newEvent = Event({
+                    company     : req.body.company,
+                    title       : req.body.title,
+                    content     : req.body.content,
+                    numVisitors : req.body.numVisitors || 0,
+                    subsidiary  : req.body.sub,
+                    address     : req.body.address,
+                    city        : req.body.city,
+                    registerer  : [],  // array of user ids
+                    startDate   : req.body.start,        //weird time stuff
+                    endDate     : req.body.end,
+                    expired     : false,
+                    views       : 0
+                });
+        
+                newEvent.save(function(err, event){
+                    if (err) {
+                        res.end({
+                            errorType: "database",
+                            errorMessage: "error in saving into the database"
+                        });
+                        throw err;
+                    } else{
+                        //event.id
+                        console.log(company); //
+                        var id = event.id;
+                        
+                        if (company.events) {
+                            company.events.push(id);
+                            console.log("Added events: " + company.events);
+                        } else {
+                            company.events = [id];
+                            console.log("Added events: " + company.events);
+                        }
+                        company.save(function(err){
+                            if (err) throw err;
+                            res.end("success");
+                        });
+                    }
+                });
+                
+            }
+        }); //end Company.findOne
+        
+    }); //end POST('/api/addevent')
 };

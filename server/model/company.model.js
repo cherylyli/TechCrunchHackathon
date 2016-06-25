@@ -8,9 +8,9 @@ var companySchema = new Schema({
     speciality      : [String],   //list of interests of the company, eg. apps, virtual reality, digital marketing, machine learning
     industry        : String,       //eg. Internet, Banking
     type            : String,           //public or private or startup
-    events          : [Number], //id of events that the company has
+    events          : [String], //id of events that the company has
     founded         : Number,
-    description     : String   
+    description     : String
 });
 var Company = mongoose.model("Company", companySchema);
 
