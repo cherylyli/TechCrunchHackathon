@@ -517,9 +517,6 @@ a:active {
     padding: 15px 0 0;
 }
 
-
-
-
 .home-focus {
     width: 100%;
     height: 150px;
@@ -545,7 +542,8 @@ a:active {
     padding: 10px 0;
     box-sizing: border-box;
     position: relative;
-    display: table;    table-layout: fixed;
+    display: table;
+    table-layout: fixed;
 }
 
 .home-list-logo-box {
@@ -558,7 +556,8 @@ a:active {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: 1px solid #dcdcdc;display: block;
+    border: 1px solid #dcdcdc;
+    display: block;
 }
 
 .home-list-text {
@@ -582,18 +581,70 @@ a:active {
     z-index: -1;
 }
 
-.company-top{}
+.company-top {
+    height: 250px;
+    width: 100%;
+    overflow: hidden;
+    padding: 75px 15px 0 15px;
+    box-sizing: border-box;
+    box-sizing: border-box;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 
-.company-top-content{}
+.company-top-content {
+    width: 100%;
+    position: relative;
+    padding: 60px 0 0;background: #fff;
+    height: 175px;
+}
 
-.company-top-img{}
+.company-top-img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -45px;
+    margin: auto;
+}
 
-.company-top-t1{}
+.company-top-t1 {
+    text-align: center;
+    font-size: 1rem;
+    line-height: 25px;
+}
 
-.company-top-t2{}
-.company-top-t3{}
+.company-top-t2 {
+    text-align: center;
+    font-size: 0.8rem;
+    line-height: 20px;
+    width: 60px;
+    margin: 5px auto;
+    border: 1px solid #777;
+    color: #777;
+    border-radius: 5px;
+}
+
+.company-top-t3 {
+    text-align: center;
+    font-size: 0.8rem;
+    line-height: 25px;color: #777;
+}
+.company-top-t4 {
+    text-align: center;
+    font-size: 0.8rem;
+    line-height: 25px;
+    width: 80px;
+    margin: 0px auto;
+    border: 1px solid #51ff2d;
+    color: #51ff2d;
+}
 
 /*/////////////////////////*/
+
 .discover-slide-img-box {
     width: 100vw;
     height: 60vw;
@@ -719,7 +770,9 @@ a:active {
 
 .coupon-activity {
     width: 100%;
-    padding: 10px 0;
+    padding: 3px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
 }
 
 .coupon-activity-tab-box {

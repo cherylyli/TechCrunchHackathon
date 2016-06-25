@@ -8,20 +8,21 @@
         </div>
     </ion-header-bar>
     <ion-content>
-        <div class="company-top">
+        <div class="company-top" style="background-image: url({{company.image[0]}});
+}">
             <div class="company-top-content">
-                <img class="company-top-img" src="{{data.image[0]}}" />
-                <div class="company-top-t1"><span ng-bind="data.name"></span></div>
+                <img class="company-top-img" src="{{company.logo}}" />
+                <div class="company-top-t1"><span ng-bind="company.name"></span></div>
                 <div class="company-top-t2">互联网</div>
-                <div class="company-top-t3"><span ng-bind="data.companySize"></span>人关注</div>
+                <div class="company-top-t3"><span ng-bind="company.companySize"></span>人关注</div>
                 <div class="company-top-t4">已关注</div>
             </div>
         </div>
         <div class="coupon-activity dispaly-table font-size-10 color-black text-align-center line-height-30">
-            <div class="dispaly-table-cell-middle coupon-activity-tab-box"><span class="coupon-tab" ng-class="couponTab" ng-click="chooseCoupon()">优惠</span></div>
-            <div class="dispaly-table-cell-middle coupon-activity-tab-box"><span class="activity-tab" ng-class="activityTab" ng-click="chooseActivity()">活动</span></div>
+            <div class="dispaly-table-cell-middle coupon-activity-tab-box" style="border-right: 1px solid #aaa;"><span class="coupon-tab" ng-class="couponTab" ng-click="chooseCoupon()">活动信息</span></div>
+            <div class="dispaly-table-cell-middle coupon-activity-tab-box"><span class="activity-tab" ng-class="activityTab" ng-click="chooseActivity()">公司详情</span></div>
         </div>
-        <ion-list ng-show="couponTab=='active-tab'">
+        <ion-list ng-show="eventtab=='active-tab'">
             <div>开放活动</div>
             <ion-item ng-repeat="item in deals" class="item-remove-animate" href="">
                 
@@ -31,7 +32,7 @@
                 
             </ion-item>
         </ion-list>
-        <ion-list ng-show="activityTab=='active-tab'" class="activity-list">
+        <ion-list ng-show="detailtab=='active-tab'" class="activity-list">
             <ion-item class="" href="">
                 <span ng-bind="data.description"></span>
             </ion-item>

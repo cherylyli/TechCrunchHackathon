@@ -115,7 +115,8 @@ angular.module('starter.controllers', [])
     });
 
     /*initialize the $scope variable*/
-    $scope.data = '';
+    $scope.company = '';
+    $scope.event = '';
     $scope.id = $stateParams.id;
 
     /**
@@ -138,7 +139,7 @@ angular.module('starter.controllers', [])
             success: function (result) {
                 if (result.statusCode == 200) {
                     console.log(result.data);
-                    $scope.data = result.data;
+                    $scope.company = result.data.company;
                     
 
                 }
