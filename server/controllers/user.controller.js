@@ -98,6 +98,7 @@ module.exports = function(app){
     
     //register for an event
     app.post('/api/attend',function(req, res){
+        // if the user has a session, then the req.session.phone would be set & would be truthy
         if (req.session.phone) {
             User.findOne({phone: req.session.phone}, function(err, user){
                 if (err) throw err;

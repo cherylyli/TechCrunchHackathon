@@ -18,31 +18,24 @@ module.exports = function(app){
                 future: []
             }
         };
-        var eventList = Event.find({company: req.body.company});
-        if (eventList === 0) {
-            resp.statusCode = 404,
-            resp.errorMessage = "There are no events found for " + req.body.company + ".";
-        } else {
-            resp.statusCode = 200;
-            resp.data = eventList;
-            //sort events by past/present & also by time
-            eventList.forEach(function(event){
-                if (event.expired === false) {
-                    resp.data.future.push({
-                        time: event.startDate,
-                        title: event.title,
-                        left: event.numVisitors
-                        });
-                } else {
-                    resp.data.past.push({
-                        time: event.startDate,
-                        title: event.title,
-                        left: event.numVisitors
-                        });    
-                }
-            });
-        }
-        res.json(resp);
+        Event.find({company: req.body.company}, function(err, events){
+            if (err) throw err;
+            if (!events) {
+                resp.statusCode = 404;
+                resp.errorMessage = "No events found";
+            } else {
+                resp.statusCode = 200;
+                events.forEach(function(e){
+                    if (e.expired === false) {
+                        resp.data.future.push(e);
+                    } else {
+                        resp.data.past.push(e);
+                    }
+                });
+            }
+            res.json(resp);
+            
+        });
          
     }); //POST /api/event
     
@@ -62,7 +55,10 @@ module.exports = function(app){
             errorMessage: "Nothing loaded",
             data: {
                 company: {},
-                events: []
+                events: {
+                    past: [],
+                    future: []
+                }
             }
         };
         Company.findOne({_id: req.body.id}, function(err, company){
@@ -72,11 +68,15 @@ module.exports = function(app){
                 resp.statusCode = 500;
                 resp.errorMessage = "No company found";
             } else {
-                if (!resp.data.company.events) {
+                if (company.events) {
                     resp.statusCode = 200;
-                    var eventList = resp.data.company.events;
-                    eventList.forEach(function(e){
-                    resp.data.events.push(Event.findOne({_id: e}));
+                    //console.log(company.events);
+                    company.events.forEach(function(e){
+                        if (e.expired === false) {
+                            resp.data.events.past.push(Event.findOne({_id: e}));
+                        } else {
+                            resp.data.events.future.push(Event.findOne({_id: e}));
+                        }
                     });    
                 } else {
                     resp.data.events = [];
@@ -92,12 +92,19 @@ module.exports = function(app){
     });
     
     app.post('/api/eventinfo', function(req, res){
-        var resp = {
-            statusCode: 200,
-            errorMessage: "",
-            data: Event.findOne({_id: req.body.id})
-        };    
-        res.json(resp);
+        Event.findOne({_id: req.body.id}, function(err, e){
+            if (err) throw err;
+            e.remaining = e.numVisitors - e.registerer.length;
+            if (e.remaining <= 0) {
+                e.full = true;
+            }
+            res.json({
+                statusCode: 200,
+                errorMessage: "",
+                data: e
+            });
+        });
+        
     });
     
 };
