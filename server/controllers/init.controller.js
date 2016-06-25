@@ -100,7 +100,7 @@ module.exports = function(app){
                     address     : req.body.address,
                     city        : req.body.city,
                     registerer  : [],  // array of user ids
-                    startDate   : req.body.start,        //weird time stuff
+                    startDate   : req.body.start,
                     endDate     : req.body.end,
                     expired     : false,
                     views       : 0
@@ -121,7 +121,7 @@ module.exports = function(app){
                         throw err;
                     } else{
                         //event.id
-                        console.log(company); //
+                        console.log(company);
                         var id = event.id;
                         
                         if (company.events) {

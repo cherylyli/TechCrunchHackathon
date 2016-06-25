@@ -123,7 +123,7 @@ module.exports = function(app){
                 //e.time = "2016年 6月 9:00 - 17:00";
                 //console.log(resp.data);
                 console.log(omgCrazyShit);
-                company.hotness += 1/(company.events.length); // accumulate company hotn
+                company.hotness += 1; // accumulate company hotn
                 company.save(function(err){
                     if (err) throw err;
                 });
