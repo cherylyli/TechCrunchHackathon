@@ -3,6 +3,21 @@ var Company = require('../model/company.model');
 var Event   = require('../model/event.model');
 var bodyParser = require('body-parser');
 
+// function to sort list by views
+function sortListByViews(event){
+  event.sort(function(a, b){
+    if (a.views < b.views){
+            return -1;
+        } else if (a.views > b.views) {
+            return 1;
+        } else {
+            return 0;
+        }
+  });
+};
+
+
+
 module.exports = function(app){
     app.use(bodyParser.urlencoded({extended:true}));
     app.use(bodyParser.json());
@@ -14,30 +29,64 @@ module.exports = function(app){
             errorMessage: "",
             data: {
                 company : [],
-                hot     : [],
+                hot     : [], // array of event objects
                 events  : []
             }
         };
         Company.find({}, function(err, companies){
             if (err) throw err;
             companies.forEach(function(c){
+                
                 if (Math.random() >= 0.3) {
                     resp.data.company.push(c);    
                 } else {
-                    resp.data.hot.push(c);   
+                    //resp.data.hot.push(c);   
                 }
             });
+            
+
+            
+            
             Event.find({}, function(err, events){
                 if (err) throw err;
                 if (events) {
+                    
+                    // sort events by views
+                    sortListByViews(events);
+                    
+                    
+                    
+                    
+                    //for each event, push it into the resp object
                     events.forEach(function(e){
+                        
+                        // accumulate views to company profiles
+                        
+                        // var c = Company.findOne({name: e.company});
+                        // if (resp.data.hot.indexOf(c.name) >= 0){
+                            
+                        // } else {
+                        //     resp.data.hot.push(c);
+                        // }
+                        
+                        
+                        
                         resp.data.events.push(e);         
                     });    
-                }
-                resp.statusCode = 200;
+                    
+                    // events.forEach(function(e){
+                    //     events[0].v
+                    //     resp.data.events.push(e);         
+                    // });    
+                    resp.statusCode = 200;
                 
                 res.json(resp);
-                res.end();
+                res.end();    
+                }
+                //resp.statusCode = 200;
+                
+                //res.json(resp);
+                //res.end();
             });
         });
         
@@ -100,7 +149,7 @@ module.exports = function(app){
                 past: [],
                 future: []
             }
-        }
+        };
         if (req.session.phone){
             resp.statusCode = 200;
             User.findOne({phone: req.session.phone}, function(err, user){
@@ -138,6 +187,30 @@ module.exports = function(app){
                 });
             });
         } 
+    });
+    
+    app.post('/api/user/following', function(req, res){
+        if (!req.session.phone) {
+            res.json({
+                errorMessage: "not logged in",
+                statusCode: 500
+            });
+        } else {
+            var resp = {
+                errorMessage: "",
+                statusCode: 200,
+                data: []
+            };
+            User.findOne({phone: req.session.phone}, function(err, user){
+                if (err) throw err;
+                var eventlist = user.events;
+                eventlist.forEach(function(e){
+                     resp.data.push(Event.findOne({_id: e}));
+                });
+                res.json(resp);
+            });
+            
+        }
     });
     
 };

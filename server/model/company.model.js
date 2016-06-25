@@ -12,7 +12,9 @@ var companySchema = new Schema({
     type            : String,           //public or private or startup
     events          : [String], //id of events that the company has
     founded         : Number,
-    description     : String
+    description     : String,
+    hotness         : Number
+    
 });
 var Company = mongoose.model("Company", companySchema);
 

@@ -12,7 +12,8 @@ var userSchema = new Schema({
         major : String
     },
     companiesOfInterest: [String],    //list of companies that the user is interested in
-    events: [String]
+    events: [String],
+    following: [String]
 });
 
 var User = mongoose.model("User", userSchema);

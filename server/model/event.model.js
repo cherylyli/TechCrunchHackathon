@@ -15,7 +15,6 @@ var eventSchema = new Schema({
     expired     : Boolean,
     views       : Number,
     city        : String
-    
 });
 
 var Event = mongoose.model("Event", eventSchema);
