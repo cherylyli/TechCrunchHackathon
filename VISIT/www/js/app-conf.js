@@ -19,7 +19,7 @@ var ERROR = {
 var USER = {};
 
 var API_HOST = '/api';
-//var API_HOST = 'https://techcrunchhackathon-cherylyli.c9users.io/api';
+// var API_HOST = 'https://techcrunchhackathon-cherylyli.c9users.io/api';
 var API = {
     HOME: API_HOST + '/home',
 
@@ -30,11 +30,11 @@ var API = {
     EVENTINFO: API_HOST + '/eventinfo',
 
     COMPANY: API_HOST + '/user/following',
-    
+
     EVENT: API_HOST + '/user/myevents',
-    
+
     SIGNUP: API_HOST + '/signup',
-    
+
     LOGIN: API_HOST + '/login'
 
 
