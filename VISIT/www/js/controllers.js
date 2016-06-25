@@ -238,7 +238,7 @@ angular.module('starter.controllers', [])
 .controller('UserCtrl', function ($scope, $ionicTabsDelegate, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $timeout, $ionicLoading, $localstorage, $ionicHistory, $state, $stateParams,$ionicScrollDelegate) {
 
     $scope.$on('$ionicView.enter', function () {
-        $ionicTabsDelegate.$getByHandle('tabs').showBar(false);
+        $ionicTabsDelegate.$getByHandle('tabs').showBar(true);
     });
 
 });
