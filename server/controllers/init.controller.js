@@ -2,6 +2,7 @@ var User    = require('../model/user.model');
 var Company = require('../model/company.model');
 var Event   = require('../model/event.model');
 var bodyParser = require('body-parser');
+var globalFuncs = require('../globals/config');
 
 
 module.exports = function(app){
@@ -99,11 +100,17 @@ module.exports = function(app){
                     address     : req.body.address,
                     city        : req.body.city,
                     registerer  : [],  // array of user ids
-                    startDate   : req.body.start,        //weird time stuff
+                    startDate   : req.body.start,
                     endDate     : req.body.end,
                     expired     : false,
                     views       : 0
                 });
+                
+                // calculuate the mean hotness for each company each time adding an event
+                if (company.events.length !== 0){
+                    company.hotness = (company.hotness)*(company.events.length)/(company.events.length+1);
+                    company.save(function(err){if(err)throw err;});
+                }
         
                 newEvent.save(function(err, event){
                     if (err) {
@@ -114,7 +121,7 @@ module.exports = function(app){
                         throw err;
                     } else{
                         //event.id
-                        console.log(company); //
+                        console.log(company);
                         var id = event.id;
                         
                         if (company.events) {

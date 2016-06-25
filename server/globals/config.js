@@ -7,6 +7,17 @@ module.exports = {
     serverLogging: function(req, res, next){
 	                    console.log(req.method, req.url);
 	                    next();
-                    }
+                    },
+    sortListByHotness: function(list){
+        list.sort(function(a, b){
+            if (a.hotness < b.hotness){
+                return -1;
+            } else if (a.hotness > b.hotness) {
+                return 1;
+            } else {
+                return 0;
+            }
+        });
+    }
 };
 

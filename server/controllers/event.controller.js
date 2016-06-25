@@ -105,6 +105,8 @@ module.exports = function(app){
             e.save(function(err){
                 if (err) throw err;
             });
+
+
             //console.log(resp.data);
             omgCrazyShit["remaining"] = e.numVisitors - e.registerer.length;
             if (e.remaining <= 0) {
@@ -121,9 +123,13 @@ module.exports = function(app){
                 //e.time = "2016年 6月 9:00 - 17:00";
                 //console.log(resp.data);
                 console.log(omgCrazyShit);
+                company.hotness += 1; // accumulate company hotn
+                company.save(function(err){
+                    if (err) throw err;
+                });
                 res.json({
                     statusCode: 200,
-                    errorMessage: "fuck my life",
+                    errorMessage: "oh mon dieu",
                     data: omgCrazyShit,
                     time: omgCrazyShit.time
                 });
