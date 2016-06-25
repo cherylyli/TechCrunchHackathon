@@ -19,7 +19,7 @@ var ERROR = {
 var USER = {};
 
 var API_HOST = '/api';
-//var API_HOST = 'http://vipapi-v3.shanghaiwow.com/api';
+//var API_HOST = 'https://techcrunchhackathon-cherylyli.c9users.io/api';
 var API = {
     HOME: API_HOST + '/home',
 
