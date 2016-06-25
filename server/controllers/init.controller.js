@@ -47,7 +47,7 @@ module.exports = function(app){
 	   });
     }); //end app.post('/api/signup')
     
-    app.post('/api/companyinfo', function(req, res){
+    app.post('/api/makecompany', function(req, res){
         Company.find({name: req.body.name}, function(err, companies){
             if (err) throw err;
             if (companies.length === 0){
