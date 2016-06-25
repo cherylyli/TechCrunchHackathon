@@ -56,7 +56,8 @@ angular.module('starter.controllers', [])
 
     $scope.goCompanyDetail = function (id) {
         $state.go('tab.home-company-detail', {
-            id: id
+            id: id,
+            tab: 'home'
         });
     };
 
@@ -106,6 +107,13 @@ angular.module('starter.controllers', [])
 
     init();
 
+    $scope.goCompanyDetail = function (id) {
+        $state.go('tab.home-company-detail', {
+            id: id,
+            tab: 'home'
+        });
+    };
+
 })
 
 .controller('CompanyDetailCtrl', function ($scope, $ionicTabsDelegate, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $timeout, $ionicLoading, $localstorage, $ionicHistory, $state, $stateParams, $ionicScrollDelegate) {
@@ -118,6 +126,7 @@ angular.module('starter.controllers', [])
     $scope.company = '';
     $scope.event = '';
     $scope.id = $stateParams.id;
+    $scope.tab = $stateParams.tab;
 
     $scope.eventtab = 'active-tab';
     $scope.detailtab = '';
@@ -177,8 +186,9 @@ angular.module('starter.controllers', [])
     };
 
     $scope.goEventDetail = function (id) {
-        $state.go('tab.home-event-detail', {
-            id: id
+        $state.go('tab.' + $scope.tab + '-event-detail', {
+            id: id,
+            tab: $scope.tab
         });
     };
 
@@ -271,7 +281,7 @@ angular.module('starter.controllers', [])
     });
 
     $scope.company = '';
-    
+
     /**
      * Initialize the Controller
      * @author fly
@@ -305,6 +315,13 @@ angular.module('starter.controllers', [])
     };
 
     init();
+
+    $scope.goCompanyDetail = function (id) {
+        $state.go('tab.company-company-detail', {
+            id: id,
+            tab: 'company'
+        });
+    };
 })
 
 .controller('EventCtrl', function ($scope, $ionicTabsDelegate, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $timeout, $ionicLoading, $localstorage, $ionicHistory, $state, $stateParams, $ionicScrollDelegate) {
@@ -314,7 +331,7 @@ angular.module('starter.controllers', [])
     });
 
     $scope.event = '';
-    
+
     /**
      * Initialize the Controller
      * @author fly
@@ -322,7 +339,7 @@ angular.module('starter.controllers', [])
      * @return null
      */
     var init = function () {
-        
+
         $ionicLoading.show();
         $.ajax({
             type: 'post',
@@ -333,7 +350,7 @@ angular.module('starter.controllers', [])
             success: function (result) {
                 if (result.statusCode == 200) {
                     console.log(result.data);
-                    $scope.event = result.data.company;
+                    $scope.event = result.data;
 
                 }
                 $ionicLoading.hide();
@@ -348,6 +365,13 @@ angular.module('starter.controllers', [])
     };
 
     init();
+    
+    $scope.goEventDetail = function (id) {
+        $state.go('tab.event-event-detail', {
+            id: id,
+            tab: $scope.tab
+        });
+    };
 })
 
 .controller('UserCtrl', function ($scope, $ionicTabsDelegate, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $timeout, $ionicLoading, $localstorage, $ionicHistory, $state, $stateParams, $ionicScrollDelegate) {

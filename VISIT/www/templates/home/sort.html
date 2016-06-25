@@ -7,13 +7,10 @@
             <!--            <img class="icon-logo" src="img/icon/homepage_logo@3x.png">-->
             <div class="color-main">Visit</div>
         </div>
-        <div class="buttons">
-            <a class="icon-search z-index-100" href="#/tab/tab1/search/tab1"></a>
-        </div>
     </ion-header-bar>
     <ion-content>
         <ion-list show-delete="shouldShowDelete" show-reorder="shouldShowReorder" can-swipe="listCanSwipe" class="sort-list">
-            <ion-item ng-repeat="item in company" class="item-remove-animate home-list" href="">
+            <ion-item ng-repeat="item in company" class="item-remove-animate home-list" ng-click="goCompanyDetail('{{item._id}}')">
                 <div class="home-list-box1">
                     <div class="home-list-box2">
                         <div class="home-list-tab">互联网</div>
