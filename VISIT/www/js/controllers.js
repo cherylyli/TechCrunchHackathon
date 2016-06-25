@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('HomeCtrl', function ($scope, $ionicTabsDelegate, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $timeout, $ionicLoading, $localstorage, $ionicHistory,$state) {
+.controller('HomeCtrl', function ($scope, $ionicTabsDelegate, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $timeout, $ionicLoading, $localstorage, $ionicHistory, $state) {
 
     $scope.$on('$ionicView.enter', function () {
         $ionicTabsDelegate.$getByHandle('tabs').showBar(true);
@@ -53,7 +53,7 @@ angular.module('starter.controllers', [])
             sort: sort
         });
     };
-    
+
     $scope.goCompanyDetail = function (id) {
         $state.go('tab.home-company-detail', {
             id: id
@@ -62,7 +62,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('SortCtrl', function ($scope, $ionicTabsDelegate, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $timeout, $ionicLoading, $localstorage, $ionicHistory,$state) {
+.controller('SortCtrl', function ($scope, $ionicTabsDelegate, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $timeout, $ionicLoading, $localstorage, $ionicHistory, $state) {
 
     $scope.$on('$ionicView.enter', function () {
         $ionicTabsDelegate.$getByHandle('tabs').showBar(true);
@@ -90,7 +90,7 @@ angular.module('starter.controllers', [])
                 if (result.statusCode == 200) {
                     console.log(result.data);
                     $scope.company = result.data;
-                    
+
 
                 }
                 $ionicLoading.hide();
@@ -108,7 +108,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('CompanyDetailCtrl', function ($scope, $ionicTabsDelegate, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $timeout, $ionicLoading, $localstorage, $ionicHistory,$state,$stateParams) {
+.controller('CompanyDetailCtrl', function ($scope, $ionicTabsDelegate, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $timeout, $ionicLoading, $localstorage, $ionicHistory, $state, $stateParams) {
 
     $scope.$on('$ionicView.enter', function () {
         $ionicTabsDelegate.$getByHandle('tabs').showBar(false);
@@ -118,6 +118,9 @@ angular.module('starter.controllers', [])
     $scope.company = '';
     $scope.event = '';
     $scope.id = $stateParams.id;
+
+    $scope.eventtab = 'active-tab';
+    $scope.detailtab = '';
 
     /**
      * Initialize the Controller
@@ -140,7 +143,7 @@ angular.module('starter.controllers', [])
                 if (result.statusCode == 200) {
                     console.log(result.data);
                     $scope.company = result.data.company;
-                    
+
 
                 }
                 $ionicLoading.hide();
@@ -155,22 +158,22 @@ angular.module('starter.controllers', [])
     };
 
     init();
-    
+
     /**
      * Change Coupon or activity
      * @author fly
      * @param null
      * @return null
      */
-    $scope.chooseCoupon = function () {
+    $scope.chooseEvent = function () {
         $ionicScrollDelegate.scrollTop();
-        $scope.couponTab = 'active-tab';
-        $scope.activityTab = '';
+        $scope.eventtab = 'active-tab';
+        $scope.detailtab = '';
     };
-    $scope.chooseActivity = function () {
+    $scope.chooseDetail = function () {
         $ionicScrollDelegate.scrollTop();
-        $scope.couponTab = '';
-        $scope.activityTab = 'active-tab';
+        $scope.eventtab = '';
+        $scope.detailtab = 'active-tab';
     };
 
 });
