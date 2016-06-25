@@ -96,4 +96,24 @@ module.exports = function(app){
         
     });
     
+    //register for an event
+    app.post('/api/attend',function(req, res){
+        if (req.session.phone) {
+            User.findOne({phone: req.session.phone}, function(err, user){
+                if (err) throw err;
+                user.events.push(req.body.id);
+                user.save(function(err){
+                   if (err) throw err; 
+                });
+                Event.findOne({_id: req.body.id}, function(err, event){
+                    if (err) throw err;
+                    event.registerer.push(req.session.phone);
+                    event.save(function(err){
+                        if (err) throw err;
+                    });
+                });
+            });
+        } 
+    });
+    
 };
