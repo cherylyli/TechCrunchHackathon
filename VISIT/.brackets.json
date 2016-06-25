@@ -1,0 +1,6 @@
+{
+    "jscodehints.detectedExclusions": [
+        "/Users/Fly/Code/app/ionic1.2/VISIT/platforms/ios/cordova/lib/spawn.js",
+        "/Users/Fly/Code/app/ionic1.2/VISIT/www/js/app.js"
+    ]
+}
