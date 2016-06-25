@@ -12,13 +12,7 @@ var userSchema = new Schema({
         major : String
     },
     companiesOfInterest: [String],    //list of companies that the user is interested in
-    events: [
-                {
-                    eventName: String,
-                    expired  : Boolean
-                }
-            ]
-   
+    events: [String]
 });
 
 var User = mongoose.model("User", userSchema);

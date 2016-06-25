@@ -92,17 +92,43 @@ module.exports = function(app){
     });
     
     app.post('/api/eventinfo', function(req, res){
+        var resp = {
+            statusCode: 200,
+            errorMessage: "I'm sleepy",
+            data: {}
+        }
         Event.findOne({_id: req.body.id}, function(err, e){
             if (err) throw err;
-            e.remaining = e.numVisitors - e.registerer.length;
-            if (e.remaining <= 0) {
-                e.full = true;
-            }
-            res.json({
-                statusCode: 200,
-                errorMessage: "",
-                data: e
+            // create a local copy
+            var omgCrazyShit = e;
+            e.views =+ 1;
+            e.save(function(err){
+                if (err) throw err;
             });
+            //console.log(resp.data);
+            omgCrazyShit["remaining"] = e.numVisitors - e.registerer.length;
+            if (e.remaining <= 0) {
+                omgCrazyShit.full = true;
+                console.log(omgCrazyShit.full);
+                
+            }
+            Company.findOne({name: e.company}, function(err, company){
+                if (err) throw err;
+                resp.data.logo = company.logo;
+                console.log("Event's startdate: " + e.startDate);
+                omgCrazyShit.time = (e.startDate.getYear() +1900 )+ "年 " + (e.startDate.getMonth() + 1) + "月 "+ e.startDate.getDay() + "日 "+ e.startDate.getHours() + ":00－" + e.endDate.getHours() + ":00";
+                console.log(omgCrazyShit.time);
+                //e.time = "2016年 6月 9:00 - 17:00";
+                //console.log(resp.data);
+                console.log(omgCrazyShit);
+                res.json({
+                    statusCode: 200,
+                    errorMessage: "fuck my life",
+                    data: omgCrazyShit,
+                    time: omgCrazyShit.time
+                });
+            });
+            
         });
         
     });

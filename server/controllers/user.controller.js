@@ -91,9 +91,31 @@ module.exports = function(app){
         res.json(resp);
     });
     
-    //update personal data
-    app.post('/api/user/personal', function(req, res){
-        
+    //get a person's events
+    app.post('/api/user/myevents', function(req, res){
+        var resp = {
+            statusCode: 500,
+            errorMessage: "Not logged in",
+            data: {
+                past: [],
+                future: []
+            }
+        }
+        if (req.session.phone){
+            resp.statusCode = 200;
+            User.findOne({phone: req.session.phone}, function(err, user){
+                if (err) throw err;
+                user.events.forEach(function(e){
+                    var newEvent = Event.findOne({_id: e});
+                    if (newEvent.expired === false) {
+                        resp.data.future.push(newEvent);
+                    } else {
+                        resp.data.past.push(newEvent);
+                    }
+                });
+                res.json(resp);
+            });
+        }
     });
     
     //register for an event
@@ -112,6 +134,7 @@ module.exports = function(app){
                     event.save(function(err){
                         if (err) throw err;
                     });
+                    res.send("sucess");
                 });
             });
         } 
