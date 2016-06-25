@@ -1,0 +1,91 @@
+<ion-view>
+    <ion-header-bar align-title="center">
+        <button class="button set-button buttons button-clear header-item">
+            <i class="icon-back icon-set"></i>
+        </button>
+        <div class="title title-center header-item">
+            <div class="color-main">我</div>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <div class="company-top user-profile-bg" style="background-image: url({{company.image[0]}});
+}">
+            <div class="company-top-content">
+                <img class="company-top-img" src="../img/head.png" />
+                <div class="company-top-t1">Mike</div>
+                <div class="company-top-t3">188-0173-7253</div>
+                <img class="edit" src="img/icon/edit.png" alt="" />
+            </div>
+        </div>
+        <div class="coupon-activity dispaly-table font-size-10 color-black text-align-center user-profile-event">
+            <div class="dispaly-table-cell-middle coupon-activity-tab-box upe-border upe-done">
+              <strong>10</strong><br />
+              已参观
+            </div>
+            <div class="dispaly-table-cell-middle coupon-activity-tab-box">
+              <strong>10</strong><br />
+              即将开始
+            </div>
+        </div>
+
+        <div class="user-profile-detail">
+
+            <div class="item-list item-list-1">
+                <div class="item-list-title item-list-title-1">兴趣标签</div>
+                <div class="item-list-content">
+                    <span>互联网</span>
+                    <span>技术</span>
+                    <span>大数据</span>
+                </div>
+            </div>
+
+            <div class="item-list item-list-2">
+                <div class="item-list-title item-list-title-2">教育背景</div>
+                <div class="item-list-content">
+                      <ul>
+                        <li>
+                          <div class="item-left">
+                              <strong>斯坦福大学（Stanford University）</strong><br />
+                              Computer Science
+                          </div>
+                          <div class="item-right">
+                            2013年9月入学
+                            <br />
+                            Master
+                          </div>
+                        </li>
+                        <li>
+                          <div class="item-left">
+                              <strong>斯坦福大学（Stanford University）</strong><br />
+                              Computer Science
+                          </div>
+                          <div class="item-right">
+                            2013年9月入学
+                            <br />
+                            Master
+                          </div>
+                        </li>
+                      </ul>
+                      <div class="clear"></div>
+                </div>
+            </div>
+
+            <div class="item-list item-list-3">
+                <div class="item-list-title item-list-title-3">基本信息</div>
+                <div class="item-list-content">
+                  <ul>
+                    <li><span>男</span>性别</li>
+                    <li><span>26岁</span>年龄</li>
+                    <li><span>78th Laffaye St, San Francisco</span>地址</li>
+                  </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <ion-list ng-show="detailtab=='active-tab'" class="activity-list">
+            <div class="padding-15 line-height-25" ng-bind="company.description"></div>
+
+        </ion-list>
+    </ion-content>
+</ion-view>

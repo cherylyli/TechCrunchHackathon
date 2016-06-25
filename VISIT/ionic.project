@@ -1,0 +1,10 @@
+{
+  "name": "VISIT",
+  "app_id": "",
+  "proxies": [
+        {
+            "path": "/api",
+            "proxyUrl": "https://techcrunchhackathon-cherylyli.c9users.io/api"
+        }
+    ]
+}
