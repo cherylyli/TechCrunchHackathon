@@ -18,38 +18,32 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
         if (window.StatusBar) {
             // org.apache.cordova.statusbar required
-            //StatusBar.styleDefault();
-            StatusBar.styleLightContent();
+            StatusBar.styleDefault();
+//            StatusBar.styleLightContent();
         }
     });
 })
 
 .run(function ($localstorage, $interval) {
-//    var wacthUser = $interval(function () {
-//        $.ajax({
-//            type: 'post',
-//            dataType: 'json',
-//            url: API.MEMBER_LOGIN,
-//            headers: SETTING,
-//            xhrFields: {
-//                withCredentials: true
-//            },
-//            crossDomain: true,
-//            data: {
-//                account: $localstorage.get('user.email'),
-//                password: $localstorage.get('user.password')
-//            },
-//            success: function (result, textStatus, XMLHttpRequest) {
-//                console.log(result);
-//                $interval.cancel(wacthUser);
-//            },
-//            error: function (XMLHttpRequest, textStatus, errorThrown) {
-//                console.log(XMLHttpRequest.status);
-//                console.log(XMLHttpRequest.readyState);
-//                console.log(textStatus);
-//            }
-//        });
-//    }, 1000);
+    $.ajax({
+        type: 'post',
+        dataType: 'json',
+        url: API.LOGIN,
+        headers: SETTING,
+        data: {
+            phone: '13344445555'
+        },
+        success: function (result) {
+            if (result.statusCode == 200) {
+                console.log(result);
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log(XMLHttpRequest.status);
+            console.log(XMLHttpRequest.readyState);
+            console.log(textStatus);
+        }
+    });
 
 
     /*get the navigator geolocation*/
@@ -104,7 +98,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         abstract: true,
         templateUrl: 'templates/tabs.html'
     })
-    
+
     .state('tab.home', {
         url: '/home',
         views: {
@@ -114,7 +108,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             }
         }
     })
-    
+
     .state('tab.sort', {
         url: '/sort',
         params: {
@@ -127,9 +121,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             }
         }
     })
-    
+
     .state('tab.home-company-detail', {
-        url: '/home-company-detail/{id}',
+        url: '/home-company-detail/{id}/{tab}',
         views: {
             'tab-home': {
                 templateUrl: 'templates/home/company-detail.html',
@@ -137,7 +131,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             }
         }
     })
-    
+
     .state('tab.home-event-detail', {
         url: '/home-event-detail/{id}',
         views: {
@@ -147,7 +141,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             }
         }
     })
-    
+
     .state('tab.search', {
         url: '/search',
         views: {
@@ -157,13 +151,33 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             }
         }
     })
-    
+
     .state('tab.company', {
         url: '/company',
         views: {
             'tab-company': {
                 templateUrl: 'templates/company/index.html',
                 controller: 'CompanyCtrl'
+            }
+        }
+    })
+
+    .state('tab.company-company-detail', {
+        url: '/company-company-detail/{id}/{tab}',
+        views: {
+            'tab-company': {
+                templateUrl: 'templates/home/company-detail.html',
+                controller: 'CompanyDetailCtrl'
+            }
+        }
+    })
+
+    .state('tab.company-event-detail', {
+        url: '/company-event-detail/{id}',
+        views: {
+            'tab-company': {
+                templateUrl: 'templates/home/event-detail.html',
+                controller: 'EventDetailCtrl'
             }
         }
     })
@@ -178,6 +192,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
     })
     
+    .state('tab.event-event-detail', {
+        url: '/event-event-detail/{id}',
+        views: {
+            'tab-event': {
+                templateUrl: 'templates/home/event-detail.html',
+                controller: 'EventDetailCtrl'
+            }
+        }
+    })
+
     .state('tab.user', {
         url: '/user',
         views: {
@@ -187,7 +211,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             }
         }
     })
-    
+
     ;
 
     // if none of the above states are matched, use this as the fallback
