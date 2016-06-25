@@ -108,7 +108,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('CompanyDetailCtrl', function ($scope, $ionicTabsDelegate, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $timeout, $ionicLoading, $localstorage, $ionicHistory, $state, $stateParams,$ionicScrollDelegate) {
+.controller('CompanyDetailCtrl', function ($scope, $ionicTabsDelegate, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $timeout, $ionicLoading, $localstorage, $ionicHistory, $state, $stateParams, $ionicScrollDelegate) {
 
     $scope.$on('$ionicView.enter', function () {
         $ionicTabsDelegate.$getByHandle('tabs').showBar(false);
@@ -175,7 +175,7 @@ angular.module('starter.controllers', [])
         $scope.eventtab = '';
         $scope.detailtab = 'active-tab';
     };
-    
+
     $scope.goEventDetail = function (id) {
         $state.go('tab.home-event-detail', {
             id: id
@@ -184,7 +184,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('EventDetailCtrl', function ($scope, $ionicTabsDelegate, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $timeout, $ionicLoading, $localstorage, $ionicHistory, $state, $stateParams,$ionicScrollDelegate) {
+.controller('EventDetailCtrl', function ($scope, $ionicTabsDelegate, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $timeout, $ionicLoading, $localstorage, $ionicHistory, $state, $stateParams, $ionicScrollDelegate) {
 
     $scope.$on('$ionicView.enter', function () {
         $ionicTabsDelegate.$getByHandle('tabs').showBar(false);
@@ -194,7 +194,7 @@ angular.module('starter.controllers', [])
     $scope.data = '';
     $scope.id = $stateParams.id;
 
-  
+
 
     /**
      * Initialize the Controller
@@ -232,10 +232,125 @@ angular.module('starter.controllers', [])
 
     init();
 
-    
+
 })
 
-.controller('UserCtrl', function ($scope, $ionicTabsDelegate, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $timeout, $ionicLoading, $localstorage, $ionicHistory, $state, $stateParams,$ionicScrollDelegate) {
+.controller('SearchCtrl', function ($scope, $ionicTabsDelegate, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $timeout, $ionicLoading, $localstorage, $ionicHistory, $state, $stateParams, $ionicScrollDelegate) {
+
+    $scope.$on('$ionicView.enter', function () {
+        $ionicTabsDelegate.$getByHandle('tabs').showBar(true);
+    });
+
+    $scope.name = {
+        value: ''
+    };
+
+    $scope.clear = function () {
+        $scope.name.value = '';
+    };
+
+    $scope.Search = function () {
+        $state.go('tab.sort', {
+            sort: ''
+        });
+    };
+
+    $scope.KeySearch = function (e) {
+        var keycode = window.event ? e.keyCode : e.which;
+        if (keycode == 13) {
+            $scope.Search();
+        }
+    };
+
+})
+
+.controller('CompanyCtrl', function ($scope, $ionicTabsDelegate, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $timeout, $ionicLoading, $localstorage, $ionicHistory, $state, $stateParams, $ionicScrollDelegate) {
+
+    $scope.$on('$ionicView.enter', function () {
+        $ionicTabsDelegate.$getByHandle('tabs').showBar(true);
+    });
+
+    $scope.company = '';
+    
+    /**
+     * Initialize the Controller
+     * @author fly
+     * @param null
+     * @return null
+     */
+    var init = function () {
+
+        $ionicLoading.show();
+        $.ajax({
+            type: 'post',
+            dataType: 'json',
+            url: API.COMPANY,
+            headers: SETTING,
+            data: {},
+            success: function (result) {
+                if (result.statusCode == 200) {
+                    console.log(result.data);
+                    $scope.company = result.data.company;
+
+                }
+                $ionicLoading.hide();
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(XMLHttpRequest.status);
+                console.log(XMLHttpRequest.readyState);
+                console.log(textStatus);
+                $ionicLoading.hide();
+            }
+        });
+    };
+
+    init();
+})
+
+.controller('EventCtrl', function ($scope, $ionicTabsDelegate, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $timeout, $ionicLoading, $localstorage, $ionicHistory, $state, $stateParams, $ionicScrollDelegate) {
+
+    $scope.$on('$ionicView.enter', function () {
+        $ionicTabsDelegate.$getByHandle('tabs').showBar(true);
+    });
+
+    $scope.event = '';
+    
+    /**
+     * Initialize the Controller
+     * @author fly
+     * @param null
+     * @return null
+     */
+    var init = function () {
+        
+        $ionicLoading.show();
+        $.ajax({
+            type: 'post',
+            dataType: 'json',
+            url: API.EVENT,
+            headers: SETTING,
+            data: {},
+            success: function (result) {
+                if (result.statusCode == 200) {
+                    console.log(result.data);
+                    $scope.event = result.data.company;
+
+                }
+                $ionicLoading.hide();
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(XMLHttpRequest.status);
+                console.log(XMLHttpRequest.readyState);
+                console.log(textStatus);
+                $ionicLoading.hide();
+            }
+        });
+    };
+
+    init();
+})
+
+.controller('UserCtrl', function ($scope, $ionicTabsDelegate, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $timeout, $ionicLoading, $localstorage, $ionicHistory, $state, $stateParams, $ionicScrollDelegate) {
 
     $scope.$on('$ionicView.enter', function () {
         $ionicTabsDelegate.$getByHandle('tabs').showBar(true);

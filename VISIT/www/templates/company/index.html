@@ -1,56 +1,47 @@
 <ion-view>
     <ion-header-bar align-title="center">
-        <button class="button back-button buttons button-clear header-item" ng-click="$ionicGoBack()">
-            <i class="icon-back"></i>
-        </button>
+        <div class="buttons">
+            <div class="color-main font-size-10 line-height-34">上海</div>
+        </div>
         <div class="title title-center header-item">
-            <div class="color-main">公司</div>
+            <div class="color-main">关注</div>
         </div>
     </ion-header-bar>
     <ion-content>
-        <div class="company-top" style="background-image: url({{company.image[0]}});
-}">
-            <div class="company-top-content">
-                <img class="company-top-img" src="{{company.logo}}" />
-                <div class="company-top-t1"><span ng-bind="company.name"></span></div>
-                <div class="company-top-t2">互联网</div>
-                <div class="company-top-t3"><span ng-bind="company.companySize"></span>人关注</div>
-                <div class="company-top-t4">已关注</div>
-            </div>
-        </div>
-        <div class="coupon-activity dispaly-table font-size-10 color-black text-align-center line-height-30">
-            <div class="dispaly-table-cell-middle coupon-activity-tab-box" style="border-right: 1px solid #aaa;"><span class="coupon-tab" ng-class="couponTab" ng-click="chooseEvent()">参观信息</span></div>
-            <div class="dispaly-table-cell-middle coupon-activity-tab-box"><span class="activity-tab" ng-class="activityTab" ng-click="chooseDetail()">公司详情</span></div>
-        </div>
-        <ion-list ng-show="eventtab=='active-tab'">
-            <div class="company-tab-title">开放活动</div>
-            <ion-item ng-repeat="item in event.future" class="item-remove-animate event-list" ng-click="goEventDetail('{{item._id}}')">
-                <div class="event-list-text-box">
-                    <div class="event-list-logo-box">
-                        <img class="event-list-logo" src="{{item.image[0]}}" />
-                    </div>
-                    <div class="event-list-text">
-                        <div class="event-list-text-title ellipsis" ng-bind="item.title"></div>
-                        <div class="event-list-text-other ellipsis"><span ng-bind="item.numVisitors"></span>98,798人关注</div>
-                    </div>
+        <ion-list>
+            <ion-item class="item-remove-animate company-list">
+                <div class="company-top-content-1">
+                    <img class="company-top-img-1" src="{{company.logo}}" />
+                    <div class="company-top-t1">谷歌</div>
+                    <div class="company-top-t3">还剩100个名额</div>
+                    <div class="company-top-t5">已关注</div>
                 </div>
             </ion-item>
-            <div class="company-tab-title">过去活动</div>
-            <ion-item ng-repeat="item in event.past" class="item-remove-animate event-list" ng-click="goEventDetail('{{item._id}}')">
-                <div class="event-list-text-box">
-                    <div class="event-list-logo-box">
-                        <img class="event-list-logo" src="{{item.image[0]}}" />
-                    </div>
-                    <div class="event-list-text">
-                        <div class="event-list-text-title ellipsis" ng-bind="item.title"></div>
-                        <div class="event-list-text-other ellipsis"><span ng-bind="item.numVisitors"></span>98,798人关注</div>
-                    </div>
+            <ion-item class="item-remove-animate company-list">
+                <div class="company-top-content-1">
+                    <img class="company-top-img-1" src="{{company.logo}}" />
+                    <div class="company-top-t1">谷歌</div>
+                    <div class="company-top-t3">还剩100个名额</div>
+                    <div class="company-top-t5">已关注</div>
+                </div>
+            </ion-item>
+            <ion-item class="item-remove-animate company-list">
+                <div class="company-top-content-1">
+                    <img class="company-top-img-1" src="{{company.logo}}" />
+                    <div class="company-top-t1">谷歌</div>
+                    <div class="company-top-t3">还剩100个名额</div>
+                    <div class="company-top-t5">已关注</div>
+                </div>
+            </ion-item>
+            <ion-item class="item-remove-animate company-list">
+                <div class="company-top-content-1">
+                    <img class="company-top-img-1" src="{{company.logo}}" />
+                    <div class="company-top-t1">谷歌</div>
+                    <div class="company-top-t3">还剩100个名额</div>
+                    <div class="company-top-t5">已关注</div>
                 </div>
             </ion-item>
         </ion-list>
-        <ion-list ng-show="detailtab=='active-tab'" class="activity-list">
-            <div class="padding-15 line-height-25" ng-bind="company.description"></div>
 
-        </ion-list>
     </ion-content>
 </ion-view>

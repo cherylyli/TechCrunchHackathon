@@ -22,12 +22,20 @@ var API_HOST = '/api';
 //var API_HOST = 'http://vipapi-v3.shanghaiwow.com/api';
 var API = {
     HOME: API_HOST + '/home',
-    
+
     ALLCOMPANY: API_HOST + '/allcompanies',
-    
+
     COMPANYINFO: API_HOST + '/companyinfo',
+
+    EVENTINFO: API_HOST + '/eventinfo',
+
+    COMPANY: API_HOST + '/company',
     
-    EVENTINFO: API_HOST + '/eventinfo'
+    EVENT: API_HOST + '/user/myevents',
+    
+    SIGNUP: API_HOST + '/signup',
+    
+    LOGIN: API_HOST + '/login'
 
 
 };

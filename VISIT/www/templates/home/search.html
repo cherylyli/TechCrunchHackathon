@@ -1,20 +1,39 @@
 <ion-view>
     <ion-header-bar align-title="center">
-        <div class="buttons">
-            <button class="icon-search" ng-click="Search()"></button>
-        </div>
-        <input class="search-input" type="search" placeholder="请输入商户名／商圈" ng-model="name" ng-keyup="KeySearch($event)">
-        <div class="buttons">
-            <span class="search-close" ng-click="$ionicGoBack()">CLOSE</span>
+        <button class="button back-button buttons button-clear header-item" ng-click="$ionicGoBack()">
+            <i class="icon-back"></i>
+        </button>
+        <div class="title title-center header-item">
+            <div class="color-main">搜索</div>
         </div>
     </ion-header-bar>
-    <ion-content class="padding-0-15">
-        <div ng-repeat="item in category" class="search-category">
-            <div ng-bind="item.merchant_category_cn" class="font-size-9 color-black line-height-30"></div>
-            <div class="search-subcategory-box">
-                <a ng-repeat="item2 in item.subCategorys" ng-bind="item2.merchant_subcategory_cn" class="font-size-6 color-black search-subcategory" href="#/tab/{{tab}}/search-favorable/{{item2.merchant_category_id}}/{{item2.merchant_subcategory_id}}/{{item2.merchant_subcategory_cn}}/{{tab}}"></a>
+    <ion-content>
+        <div class="search-input-box">
+            <img class="search-input-icon1" src="img/icon/search2.png">
+            <input class="search-input" type="search" placeholder="Search..." ng-model="name.value" ng-keyup="KeySearch($event)">
+            <img class="search-input-icon2" src="img/icon/Delete.png" ng-click="clear()">
+        </div>
+        <div class="search-tab-box">
+            <div class="search-tab">
+                <div class="search-tab-title">行业</div>
+                <div class="search-tab-content">
+                    <div class="search-tab-btn" ng-click="Search()">互联网</div>
+                    <div class="search-tab-btn" ng-click="Search()">互联网</div>
+                    <div class="search-tab-btn" ng-click="Search()">互联网</div>
+                    <div class="search-tab-btn" ng-click="Search()">互联网</div>
+                </div>
             </div>
         </div>
-        <br>
+        <div class="search-tab-box">
+            <div class="search-tab">
+                <div class="search-tab-title">热门搜索</div>
+                <div class="search-tab-content">
+                    <div class="search-tab-btn" ng-click="Search()">谷歌</div>
+                    <div class="search-tab-btn" ng-click="Search()">苹果</div>
+                    <div class="search-tab-btn" ng-click="Search()">华为</div>
+                    <div class="search-tab-btn" ng-click="Search()">互联网</div>
+                </div>
+            </div>
+        </div>
     </ion-content>
 </ion-view>
