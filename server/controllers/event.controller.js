@@ -85,10 +85,6 @@ module.exports = function(app){
             }
             res.json(resp);
         });
-        
-        
-        
-        
     });
     
     app.post('/api/eventinfo', function(req, res){
@@ -106,7 +102,6 @@ module.exports = function(app){
                 if (err) throw err;
             });
 
-
             //console.log(resp.data);
             omgCrazyShit["remaining"] = e.numVisitors - e.registerer.length;
             if (e.remaining <= 0) {
@@ -116,14 +111,19 @@ module.exports = function(app){
             }
             Company.findOne({name: e.company}, function(err, company){
                 if (err) throw err;
-                resp.data.logo = company.logo;
+                var logo = company.logo;
                 console.log("Event's startdate: " + e.startDate);
                 omgCrazyShit.time = (e.startDate.getYear() +1900 )+ "年 " + (e.startDate.getMonth() + 1) + "月 "+ e.startDate.getDay() + "日 "+ e.startDate.getHours() + ":00－" + e.endDate.getHours() + ":00";
                 console.log(omgCrazyShit.time);
                 //e.time = "2016年 6月 9:00 - 17:00";
                 //console.log(resp.data);
                 console.log(omgCrazyShit);
-                company.hotness += 1; // accumulate company hotn
+                if (!company.hotness) {
+                    company.hotness = 1;
+                } else {
+                     company.hotness += 1;    
+                }
+                // accumulate company hotn
                 company.save(function(err){
                     if (err) throw err;
                 });
@@ -131,12 +131,10 @@ module.exports = function(app){
                     statusCode: 200,
                     errorMessage: "oh mon dieu",
                     data: omgCrazyShit,
-                    time: omgCrazyShit.time
+                    time: omgCrazyShit.time,
+                    logo: logo
                 });
             });
-            
         });
-        
     });
-    
 };

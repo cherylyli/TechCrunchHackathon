@@ -12,7 +12,6 @@ module.exports = function(app){
     /*
     Try to find a phone number that matches the one passed from req,
     if not found, then create an user with that phone number
-    
     */
     app.post('/api/signup', function(req, res){
         User.find({phone: req.body.phone}, function(err, existingProf){
@@ -137,7 +136,6 @@ module.exports = function(app){
                         });
                     }
                 });
-                
             }
         }); //end Company.findOne
         
