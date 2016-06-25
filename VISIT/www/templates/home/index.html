@@ -42,7 +42,7 @@
             <ion-item ng-repeat="item in company" class="item-remove-animate home-list" ng-click="goCompanyDetail('{{item._id}}')">
                 <div class="home-list-box1">
                     <div class="home-list-box2">
-                        <div class="home-list-tab">互联网</div>
+                        <div class="home-list-tab"><span ng-bind="item.industry"></span></div>
                         <div class="home-list-img-box">
                             <img class="home-list-img" src="{{item.image[0]}}" />
                         </div>
