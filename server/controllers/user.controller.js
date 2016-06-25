@@ -2,19 +2,7 @@ var User    = require('../model/user.model');
 var Company = require('../model/company.model');
 var Event   = require('../model/event.model');
 var bodyParser = require('body-parser');
-
-// function to sort list by views
-function sortListByViews(event){
-  event.sort(function(a, b){
-    if (a.views < b.views){
-            return -1;
-        } else if (a.views > b.views) {
-            return 1;
-        } else {
-            return 0;
-        }
-  });
-};
+var globalFuncs = require('../globals/config');
 
 
 
@@ -29,7 +17,7 @@ module.exports = function(app){
             errorMessage: "",
             data: {
                 company : [],
-                hot     : [], // array of event objects
+                hot     : [], // array of company objects
                 events  : []
             }
         };
@@ -37,47 +25,33 @@ module.exports = function(app){
             if (err) throw err;
             companies.forEach(function(c){
                 
+                // // calculuate the mean hotness for each company
+                // if (c.events.length !== 0){
+                //     c.hotness = (c.hotness)/(c.events.length);
+                // }
+                
+                // randomly put stuff in "company" array
                 if (Math.random() >= 0.3) {
                     resp.data.company.push(c);    
-                } else {
-                    //resp.data.hot.push(c);   
-                }
+                } 
+                resp.data.hot.push(c);
             });
             
-
-            
+            // sort events by hotness
+            globalFuncs.sortListByHotness(companies);
+            resp.data.hot = companies;
+        
+            //console.log(resp.data.hot);
             
             Event.find({}, function(err, events){
                 if (err) throw err;
                 if (events) {
                     
-                    // sort events by views
-                    sortListByViews(events);
-                    
-                    
-                    
-                    
                     //for each event, push it into the resp object
                     events.forEach(function(e){
-                        
-                        // accumulate views to company profiles
-                        
-                        // var c = Company.findOne({name: e.company});
-                        // if (resp.data.hot.indexOf(c.name) >= 0){
-                            
-                        // } else {
-                        //     resp.data.hot.push(c);
-                        // }
-                        
-                        
-                        
                         resp.data.events.push(e);         
                     });    
                     
-                    // events.forEach(function(e){
-                    //     events[0].v
-                    //     resp.data.events.push(e);         
-                    // });    
                     resp.statusCode = 200;
                 
                 res.json(resp);
