@@ -14,13 +14,18 @@ module.exports = function(app){
             errorMessage: "",
             data: {
                 company : [],
-                events  : []   
+                hot     : [],
+                events  : []
             }
         };
         Company.find({}, function(err, companies){
             if (err) throw err;
             companies.forEach(function(c){
-                resp.data.company.push(c);
+                if (Math.random() >= 0.3) {
+                    resp.data.company.push(c);    
+                } else {
+                    resp.data.hot.push(c);   
+                }
             });
             Event.find({}, function(err, events){
                 if (err) throw err;
@@ -84,6 +89,11 @@ module.exports = function(app){
             resp.statusCode     = 404;
         }
         res.json(resp);
+    });
+    
+    //update personal data
+    app.post('/api/user/personal', function(req, res){
         
     });
+    
 };

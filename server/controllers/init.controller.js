@@ -19,7 +19,7 @@ module.exports = function(app){
 	           throw err;
 	       } else if (existingProf.length === 0) { //if username doesn't exist, create new profile
 	                //console.log(req.body.email + ' ' + req.body.locationLong +' '+ req.body.locationLat);
-	            
+	                
 	           var newUser = User ({
 	               phone   : req.body.phone,
 	               city    : req.body.city || "",
@@ -56,6 +56,8 @@ module.exports = function(app){
                     address     : req.body.address,
                     companySize : req.body.size,
                     website     : req.body.website,
+                    logo        : req.body.logo || "",
+                    image       : req.body.image || [],
                     speciality  : req.body.speciality,
                     industry    : req.body.industry,       //eg. Internet, Banking
                     type        : req.body.type,           //public or private or startup
@@ -92,6 +94,7 @@ module.exports = function(app){
                     title       : req.body.title,
                     content     : req.body.content,
                     numVisitors : req.body.numVisitors || 0,
+                    image       : req.body.image || [],
                     subsidiary  : req.body.sub,
                     address     : req.body.address,
                     city        : req.body.city,

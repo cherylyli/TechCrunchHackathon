@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var initController = require('./controllers/init.controller');
 var userController = require('./controllers/user.controller');
+var eventController = require('./controllers/event.controller');
 
 app.use(cors());
 mongoose.connect(config.getDBConnectionString());
@@ -33,6 +34,7 @@ app.get('/', function(req, res){
 
 initController(app);
 userController(app);
+eventController(app);
 
 process.env.PORT = process.env.PORT || 80;
 
