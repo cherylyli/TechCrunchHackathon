@@ -139,7 +139,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     })
     
     .state('tab.home-event-detail', {
-        url: '/home-event-detail',
+        url: '/home-event-detail/{id}',
         views: {
             'tab-home': {
                 templateUrl: 'templates/home/event-detail.html',

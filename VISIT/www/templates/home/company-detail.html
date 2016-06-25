@@ -19,24 +19,38 @@
             </div>
         </div>
         <div class="coupon-activity dispaly-table font-size-10 color-black text-align-center line-height-30">
-            <div class="dispaly-table-cell-middle coupon-activity-tab-box" style="border-right: 1px solid #aaa;"><span class="coupon-tab" ng-class="couponTab" ng-click="chooseEvent()">活动信息</span></div>
+            <div class="dispaly-table-cell-middle coupon-activity-tab-box" style="border-right: 1px solid #aaa;"><span class="coupon-tab" ng-class="couponTab" ng-click="chooseEvent()">参观信息</span></div>
             <div class="dispaly-table-cell-middle coupon-activity-tab-box"><span class="activity-tab" ng-class="activityTab" ng-click="chooseDetail()">公司详情</span></div>
         </div>
         <ion-list ng-show="eventtab=='active-tab'">
-            <div>开放活动</div>
-            <ion-item ng-repeat="item in deals" class="item-remove-animate" href="">
-                
+            <div class="company-tab-title">开放活动</div>
+            <ion-item ng-repeat="item in event.future" class="item-remove-animate event-list" ng-click="goEventDetail('{{item._id}}')">
+                <div class="event-list-text-box">
+                    <div class="event-list-logo-box">
+                        <img class="event-list-logo" src="{{item.image[0]}}" />
+                    </div>
+                    <div class="event-list-text">
+                        <div class="event-list-text-title ellipsis" ng-bind="item.title"></div>
+                        <div class="event-list-text-other ellipsis"><span ng-bind="item.numVisitors"></span>98,798人关注</div>
+                    </div>
+                </div>
             </ion-item>
-            <div>过去活动</div>
-            <ion-item ng-repeat="item in deals" class="item-remove-animate" href="">
-                
+            <div class="company-tab-title">过去活动</div>
+            <ion-item ng-repeat="item in event.past" class="item-remove-animate event-list" ng-click="goEventDetail('{{item._id}}')">
+                <div class="event-list-text-box">
+                    <div class="event-list-logo-box">
+                        <img class="event-list-logo" src="{{item.image[0]}}" />
+                    </div>
+                    <div class="event-list-text">
+                        <div class="event-list-text-title ellipsis" ng-bind="item.title"></div>
+                        <div class="event-list-text-other ellipsis"><span ng-bind="item.numVisitors"></span>98,798人关注</div>
+                    </div>
+                </div>
             </ion-item>
         </ion-list>
         <ion-list ng-show="detailtab=='active-tab'" class="activity-list">
-            <ion-item class="" href="">
-                <span ng-bind="data.description"></span>
-            </ion-item>
-            
+            <div class="padding-15 line-height-25" ng-bind="company.description"></div>
+
         </ion-list>
     </ion-content>
 </ion-view>

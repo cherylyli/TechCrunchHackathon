@@ -25,7 +25,9 @@ var API = {
     
     ALLCOMPANY: API_HOST + '/allcompanies',
     
-    COMPANYINFO: API_HOST + '/companyinfo'
+    COMPANYINFO: API_HOST + '/companyinfo',
+    
+    EVENTINFO: API_HOST + '/eventinfo'
 
 
 };

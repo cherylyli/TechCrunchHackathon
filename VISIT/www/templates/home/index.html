@@ -15,7 +15,7 @@
         <!--<ion-refresher on-refresh="doRefresh()"></ion-refresher>-->
         <ion-slide-box ng-if="focus" class="home-focus" ng-if="focus" delegate-handle="slide-focus" on-slide-changed="slideHasChanged($index)">
             <ion-slide ng-repeat="item in focus">
-                <a class="discover-slide-img-box" ui-sref="" alt="{{item.title_cn}}">
+                <a class="discover-slide-img-box" ng-click="goCompanyDetail('{{item._id}}')" alt="{{item.title_cn}}">
                     <img ng-src="{{item.image[0]}}">
                 </a>
             </ion-slide>
@@ -45,7 +45,6 @@
                         <div class="home-list-tab">互联网</div>
                         <div class="home-list-img-box">
                             <img class="home-list-img" src="{{item.image[0]}}" />
-
                         </div>
                         <div class="home-list-text-box">
                             <div class="home-list-logo-box">

@@ -108,7 +108,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('CompanyDetailCtrl', function ($scope, $ionicTabsDelegate, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $timeout, $ionicLoading, $localstorage, $ionicHistory, $state, $stateParams) {
+.controller('CompanyDetailCtrl', function ($scope, $ionicTabsDelegate, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $timeout, $ionicLoading, $localstorage, $ionicHistory, $state, $stateParams,$ionicScrollDelegate) {
 
     $scope.$on('$ionicView.enter', function () {
         $ionicTabsDelegate.$getByHandle('tabs').showBar(false);
@@ -143,7 +143,7 @@ angular.module('starter.controllers', [])
                 if (result.statusCode == 200) {
                     console.log(result.data);
                     $scope.company = result.data.company;
-
+                    $scope.event = result.data.events;
 
                 }
                 $ionicLoading.hide();
@@ -160,7 +160,7 @@ angular.module('starter.controllers', [])
     init();
 
     /**
-     * Change Coupon or activity
+     * Change 
      * @author fly
      * @param null
      * @return null
@@ -175,5 +175,62 @@ angular.module('starter.controllers', [])
         $scope.eventtab = '';
         $scope.detailtab = 'active-tab';
     };
+    
+    $scope.goEventDetail = function (id) {
+        $state.go('tab.home-event-detail', {
+            id: id
+        });
+    };
 
+})
+
+.controller('EventDetailCtrl', function ($scope, $ionicTabsDelegate, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $timeout, $ionicLoading, $localstorage, $ionicHistory, $state, $stateParams,$ionicScrollDelegate) {
+
+    $scope.$on('$ionicView.enter', function () {
+        $ionicTabsDelegate.$getByHandle('tabs').showBar(false);
+    });
+
+    /*initialize the $scope variable*/
+    $scope.data = '';
+    $scope.id = $stateParams.id;
+
+  
+
+    /**
+     * Initialize the Controller
+     * @author fly
+     * @param null
+     * @return null
+     */
+    var init = function () {
+
+        $ionicLoading.show();
+        $.ajax({
+            type: 'post',
+            dataType: 'json',
+            url: API.EVENTINFO,
+            headers: SETTING,
+            data: {
+                id: $scope.id
+            },
+            success: function (result) {
+                if (result.statusCode == 200) {
+                    console.log(result.data);
+                    $scope.data = result.data;
+
+                }
+                $ionicLoading.hide();
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(XMLHttpRequest.status);
+                console.log(XMLHttpRequest.readyState);
+                console.log(textStatus);
+                $ionicLoading.hide();
+            }
+        });
+    };
+
+    init();
+
+    
 });
