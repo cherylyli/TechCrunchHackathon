@@ -4,7 +4,7 @@
   "proxies": [
         {
             "path": "/api",
-            "proxyUrl": "localhost:80/api"
+            "proxyUrl": "https://techcrunchhackathon-cherylyli.c9users.io/api"
         }
     ]
 }

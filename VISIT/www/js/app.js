@@ -48,7 +48,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
     /*get the navigator geolocation*/
 
-    document.addEventListener("deviceready", onDeviceReady, false);
+    /*document.addEventListener("deviceready", onDeviceReady, false);
 
     function onDeviceReady() {
         var options = {
@@ -67,7 +67,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
     function onError(error) {
         console.log('code: ' + error.code + ' - message: ' + error.message);
-    }
+    }*/
 })
 
 .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
