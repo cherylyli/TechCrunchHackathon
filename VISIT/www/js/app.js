@@ -19,31 +19,35 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         if (window.StatusBar) {
             // org.apache.cordova.statusbar required
             StatusBar.styleDefault();
-//            StatusBar.styleLightContent();
+            //            StatusBar.styleLightContent();
         }
     });
 })
 
 .run(function ($localstorage, $interval) {
-    $.ajax({
-        type: 'post',
-        dataType: 'json',
-        url: API.LOGIN,
-        headers: SETTING,
-        data: {
-            phone: '13344445555'
-        },
-        success: function (result) {
-            if (result.statusCode == 200) {
-                console.log(result);
+
+    var wacthUser = $interval(function () {
+        $.ajax({
+            type: 'post',
+            dataType: 'json',
+            url: API.LOGIN,
+            headers: SETTING,
+            data: {
+                phone: '13344445555'
+            },
+            success: function (result) {
+                if (result.statusCode == 200) {
+                    console.log(result);
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(XMLHttpRequest.status);
+                console.log(XMLHttpRequest.readyState);
+                console.log(textStatus);
             }
-        },
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-            console.log(XMLHttpRequest.status);
-            console.log(XMLHttpRequest.readyState);
-            console.log(textStatus);
-        }
-    });
+        });
+    }, 1000);
+
 
 
     /*get the navigator geolocation*/
@@ -181,7 +185,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             }
         }
     })
-    
+
     .state('tab.event', {
         url: '/event',
         views: {
@@ -191,7 +195,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             }
         }
     })
-    
+
     .state('tab.event-event-detail', {
         url: '/event-event-detail/{id}',
         views: {
