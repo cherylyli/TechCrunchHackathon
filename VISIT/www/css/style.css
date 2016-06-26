@@ -408,6 +408,10 @@ a:active {
     font-size: 0.6rem;
 }
 
+.slide-img-box img {
+    width: 100%;
+}
+
 .home-sort-area {
     padding: 15px 0;
     background: #eee;

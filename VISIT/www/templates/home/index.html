@@ -15,7 +15,7 @@
         <!--<ion-refresher on-refresh="doRefresh()"></ion-refresher>-->
         <ion-slide-box ng-if="focus" class="home-focus" ng-if="focus" delegate-handle="slide-focus" on-slide-changed="slideHasChanged($index)">
             <ion-slide ng-repeat="item in focus">
-                <a class="discover-slide-img-box" ng-click="goCompanyDetail('{{item._id}}')" alt="{{item.title_cn}}">
+                <a class="slide-img-box" ng-click="goCompanyDetail('{{item._id}}')" alt="{{item.title_cn}}">
                     <img ng-src="{{item.image[0]}}">
                 </a>
             </ion-slide>

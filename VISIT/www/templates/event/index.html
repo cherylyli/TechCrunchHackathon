@@ -9,7 +9,7 @@
     </ion-header-bar>
     <ion-content>
         <ion-list>
-            <div class="company-tab-title">开放活动</div>
+            <div class="company-tab-title" ng-if="event.future.length!=0">开放活动</div>
             <ion-item ng-repeat="item in event.future" class="item-remove-animate event-list" ng-click="goEventDetail('{{item._id}}')">
                 <div class="event-list-text-box">
                     <div class="event-list-logo-box">
@@ -21,7 +21,7 @@
                     </div>
                 </div>
             </ion-item>
-            <div class="company-tab-title">过去活动</div>
+            <div class="company-tab-title" ng-if="event.past.length!=0">过去活动</div>
             <ion-item ng-repeat="item in event.past" class="item-remove-animate event-list" ng-click="goEventDetail('{{item._id}}')">
                 <div class="event-list-text-box">
                     <div class="event-list-logo-box">
